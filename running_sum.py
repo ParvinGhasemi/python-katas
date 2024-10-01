@@ -12,24 +12,43 @@ Output: [3, 4, 6, 16, 17]
 """
 
 # Solution 1
-"""
-def running_sum(nums: list) -> list:
-	if not nums:
-		return []
+def running_sum(numbers: list) -> list:
+	if not numbers:
+		raise ValueError("Number must be a list of integers, cannot be empty.")
 	
-	for i in nums:
-		nums[i] += nums[i-1] if i > 0 else nums[i]
-"""
+	if not isinstance(numbers, list):
+		raise TypeError("NOT A LIST: Input must be a list of integers.")
+	
+	if not all(isinstance(num, int) for num in numbers):
+		raise TypeError("NOT INTEGERS: Input must be a list of integers.")
+	
+	modified_nums = numbers.copy()
+	for i in range(1, len(modified_nums)):
+		modified_nums[i] += modified_nums[i-1]
+	
+	return modified_nums
+
 
 # Solution 2
 """
 from itertools import accumulate
 
-def running_sum(nums: list) -> list:
-	return list(accumulate(nums))
+def running_sum(numbers: list) -> list:
+	if not numbers:
+		raise ValueError("Number must be a list of integers, cannot be empty.")
+	
+	if not isinstance(numbers, list):
+		raise TypeError("NOT A LIST: Input must be a list of integers.")
+	
+	if not all(isinstance(num, int) for num in numbers):
+		raise TypeError("NOT INTEGERS: Input must be a list of integers.")
+
+	return list(accumulate(numbers))
 """
 
 # Solution 3
+"""
 def running_sum(nums: list) -> list:
 	current_sum = 0
 	return [current_sum := current_sum + num for num in nums]
+"""
